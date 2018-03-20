@@ -1,0 +1,22 @@
+*, html{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	margin: 0;
+	overflow: hidden;
+}
+
+#game{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 8em;
+	height: 12em;
+	background-color: rgb(60,60,40);
+}
+
+#game .screen.action{
+	display: block;
+}
