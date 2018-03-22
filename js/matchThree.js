@@ -53,11 +53,20 @@ var matchThree = (function(){
 	}
 
 	function setup(){
+		matchThree.showScreen("splash-screen");
 		console.log("Success!")
 	}
 
 	function showScreen(screenId){
 		var dom = matchThree.dom;
+		var $ = dom.$;
+		var activeScreen = $("#game .screen.active")[0]
+
+		if(activeScreen){
+			dom.removeClass(activeScreen, "active");
+		}
+
+		matchThree.screens[screenId].run();
 	}
 
 	return {

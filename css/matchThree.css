@@ -9,14 +9,62 @@ body{
 }
 
 #game{
+	font-family: "Geo";
+	color: rgb(200,200,100);
 	position: absolute;
 	left: 0;
 	top: 0;
 	width: 8em;
 	height: 12em;
 	background-color: rgb(60,60,40);
+	background-size: 10px 10px;
+	background-image: 
+		linear-gradient(45deg,transparent 0%, rgb(20,20,20) 25%, transparent 50%, rgb(20,20,20) 75%, transparent 100%),
+		linear-gradient(-45deg,transparent 0%, rgb(20,20,20) 25%, transparent 50%, rgb(20,20,20) 75%, transparent 100%);
 }
 
 #game .screen.action{
 	display: block;
+}
+
+#splash-screen{
+	text-align: center;
+	padding-top: 2.5em;
+
+}
+
+#splash-screen .continue {
+	cursor: pointer;
+	font-size: 0.75em;
+}
+
+.logo {
+	font-family: Slackey;
+	font-size: 1.5em;
+	line-height: 0.9em;
+	margin: 0;
+	text-align: center;
+	color: rgb(70,120,20);
+	text-shadow: 0.03em 0.03em 0.03em rgb(255,255,0),
+				-0.03em -0.03em 0.03em egb(255,255,0),
+				0.10em 0.15em 0.15em rgb(0,0,0);
+
+}
+
+@font-face{
+	font-family: "Slackey";
+	font-weight: normal;
+	font-style: normal;
+	src: url("../fonts/slackey.woff") format("woff"),
+	url("../fonts/slackey.ttf") format("ttf");
+
+}
+
+@font-face{
+	font-family: "Geo";
+	font-weight: normal;
+	font-style: normal;
+	src: url("../fonts/geo.woff") format("woff"),
+	url("../fonts/geo.ttf") format("ttf");
+
 }
