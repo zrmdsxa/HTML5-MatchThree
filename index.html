@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+	
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
@@ -8,28 +9,51 @@
 
 		<script type="text/javascript" src="js/matchThree.js"></script>
 
-		<script type="text/javascript">
-			window.addEventListener("load",function()
-				{
-					matchThree.load("js/dom.js");
+		<link rel="stylesheet" type="text/css" href="css/matchThree.css">
 
+		<script type="text/javascript">
+			window.addEventListener("load", function(){
+				matchThree.load("js/dom.js");
+				matchThree.load("js/screen.splashScreen.js");
+				matchThree.load("js/screen.mainMenuScreen.js", matchThree.setup);
+				matchThree.load("js/board.js");
 			});
+
 		</script>
 
-		<link rel="stylesheet" type="text/css" href="css/matchThree.css">
 	</head>
+
 	<body>
 		<div id="game">
 			<div class="screen" id="splash-screen">
-				<h1 class="logo">Match<br>Three</h1>
+				<h1 class="logo">Match<br/>Three</h1>
 				<div class="progress">
 					<div class="indicator"></div>
 				</div>
+
 				<span class="continue">Click to continue</span>
+
 			</div>
-			<div class="screen" id="main-menu">				</div>
-			<div class="screen" id="game-screen">			</div>
-			<div class="screen" id="high-scores">			</div>
+
+			<div class="screen" id="menu-screen">
+				<h2 class="logo">Match<br/>Three</h2>
+				<ul class="menu">
+					<li><button name="game-screen">Play</button></li>
+					<li><button name="score-screen">Scores</button></li>
+					<li><button name="about-screen">About</button></li>
+					<li><button name="splash-screen">Quit</button></li>
+				</ul>
+			</div>
+
+
+			<div class="screen" id="game-screen">
+				
+			</div>
+			<div class="screen" id="high-scores">
+				
+			</div>
 		</div>
+
 	</body>
+
 </html>

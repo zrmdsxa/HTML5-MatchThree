@@ -1,55 +1,47 @@
-var matchThree = (function(){
+var matchThree = (function () {
 
 	var scriptQueue = [];
 	var numResourcesLoaded = 0;
 	var numResources = 0;
 	var executeRunning = false;
 
-	var settings = {
-		rows : 8,
-		cols : 8,
-		baseScore : 100,
-		numTileTypes : 7
-	};
-
 	function executeScriptQueue(){
 		var next = scriptQueue[0];
-		var first, script;
+		var first, script; 
 
 		if(next && next.loaded){
 			executeRunning = true;
 			scriptQueue.shift();
 			first = document.getElementsByTagName("script")[0];
 			script = document.createElement("script");
-			script.onload = function(){
+			script.onLoad = function(){
 				if(next.callback){
 					next.callback();
 				}
-
 				executeScriptQueue();
 			};
 			script.src = next.src;
 			first.parentNode.insertBefore(script, first);
-		}else{
+		} else {
 			executeRunning = false;
 		}
 	}
 
-	function load(src, callback){
+	function load(src,callback){
 		var image, queueEntry;
 
 		numResources++;
 
 		queueEntry = {
 			src : src,
-			callback : callback, 
+			callback : callback,
 			loaded : false
 		};
 
 		scriptQueue.push(queueEntry);
 
 		image = new Image();
-		image.onload = image.onerror = function(){
+		image.onLoad = image.onerror = function(){
 			numResources++;
 			queueEntry.loaded = true;
 			if(!executeRunning){
@@ -57,19 +49,19 @@ var matchThree = (function(){
 			}
 		};
 		image.src = src;
+
 	}
 
 	function setup(){
 		matchThree.showScreen("splash-screen");
-		//showScreen("splash-screen");
 	}
 
 	function showScreen(screenId){
-		console.log("showScreen");
 		var dom = matchThree.dom;
 		var $ = dom.$;
 		var activeScreen = $("#game .screen.active")[0];
 		var screen = $("#" + screenId)[0];
+
 
 		if(activeScreen){
 			dom.removeClass(activeScreen, "active");
@@ -80,13 +72,9 @@ var matchThree = (function(){
 		matchThree.screens[screenId].run();
 	}
 
-	return{
-		load: load,
-		setup: setup,
-		settings: settings,
-		showScreen: showScreen,
+	return {
+		load : load,
+		setup : setup,
 		screens: {}
 	};
-
-
 })();
