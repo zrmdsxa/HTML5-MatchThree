@@ -15,9 +15,21 @@ matchThree.screens["splash-screen"] = (function() {
 		});
 	}
 
+	function checkProgress(){
+		var $ = matchThree.dom.$;
+		var p = matchThree.getLoadProgress() * 100;
+
+		$("#splash-screen .indicator")[0].style.width = p + %;
+		if(p == 100){
+			setup();
+		}else{
+			setTimeout(checkProgress,30);
+		}
+	}
+
 	function run(){
 		if(firstRun){
-			setup();
+			checkProgress();
 			firstRun = false;
 		}
 	}

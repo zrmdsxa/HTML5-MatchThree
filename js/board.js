@@ -37,6 +37,10 @@ matchThree.board = (function(){
 				tiles[x][y] = type;
 			}
 		}
+
+		if(!hasMoves()){
+			fillBoard();
+		}
 	}
 
 	function randomTile(){
@@ -103,7 +107,7 @@ matchThree.board = (function(){
 		return chains;
 	}
 
-	function check(){
+	function check(events){
 		var chains = getChains();
 		var hadChains = false;
 		var score = 0;
@@ -151,6 +155,13 @@ matchThree.board = (function(){
 					data : moved
 				});
 
+				if(!hasMoves()){
+					fillBoard();
+					events.push({
+						type : "refill",
+						data : getBoard()
+					});
+				}
 				return check(events);
 			}
 			else{
@@ -166,6 +177,53 @@ matchThree.board = (function(){
 					return true;
 				}
 			}
+		}
+	}
+
+	function canTileMove(x,y){
+		return ((x > 0 && canSwap(x,y,x-1,y)) || 
+				(x <  cols-1 && canSwap(x,y,x+1,y)) ||
+				(y > 0 && canSwap(x,y,x,y-1)) ||
+				(y < rows-1 && canSwap(x,y,x,y+1)));
+	}
+
+	function getBoard(){
+		var copy = [] , x;
+
+		for(x = 0; x < cols; x++){
+			copy[x] = tiles[x].slice(0);
+		}
+
+		return copy;
+	}
+
+	function swap(x1,y1,x2,y2, callback){
+		var tmp, swap1, swap2;
+		var events = [];
+
+		swap1 = {
+			type : "move",
+			data : [{
+				type : getTile(x1, y1),
+				fromX : x1, fromY : y1, toX : x2, toY : y2
+			},{
+				type : getTile(x1, y1),
+				fromX : x2, fromY : y2, toX : x1, toY : y1
+			}]
+		}
+
+		if(isAdjacent(x1,y1,x2,y2)){
+			events.push(swap1);
+
+			if(canSwap(x1,y1,x2,y2)){
+				tmp = getTile(x1,y1);
+				tiles[x1][y1] = getTile(x2,y2);
+				tiles[x2][y2] = tmp;
+				events = events.concat(check());
+			}else{
+				events.push(swap2,{type : " badswap"});
+			}
+			callback(events);
 		}
 	}
 
@@ -186,7 +244,9 @@ matchThree.board = (function(){
 
 	return{
 		init : init,
+		swap : swap,
 		canSwap : canSwap,
+		getBoard : getBoard,
 		dBugTileBoard: dBugTileBoard
 	};
 })();

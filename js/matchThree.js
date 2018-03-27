@@ -12,6 +12,21 @@ var matchThree = (function(){
 		numTileTypes : 7
 	};
 
+	function getLoadProgress(){
+		return numResourcesLoaded / numResources;
+	}
+
+	function hasWebWorkers(){
+		var workers = false;
+		workers = ("Worker" in window);
+		return workers;
+	}
+
+	function preload(src){
+		var image = new Image();
+		image.src = src;
+	}
+
 	function executeScriptQueue(){
 		var next = scriptQueue[0];
 		var first, script;
@@ -84,6 +99,9 @@ var matchThree = (function(){
 		load: load,
 		setup: setup,
 		settings: settings,
+		getLoadProgress : getLoadProgress,
+		hasWebWorkers : hasWebWorkers,
+		preload : preload,
 		showScreen: showScreen,
 		screens: {}
 	};
