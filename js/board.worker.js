@@ -1,6 +1,6 @@
 var matchThree = {};
 
-importScripts("board,js");
+importScripts("board.js");
 
 addEventListener("message", function(event){
 	var board = matchThree.board;
@@ -8,6 +8,7 @@ addEventListener("message", function(event){
 
 	switch(message.command){
 		case "init":
+		console.log("init");
 		matchThree.settings = message.data;
 		board.init(callback);
 		break;
@@ -19,7 +20,7 @@ addEventListener("message", function(event){
 
 	function callback(data){
 		postMessage({
-			id : message.id;
+			id : message.id,
 			data : data,
 			tiles : board.getBoard()
 		});

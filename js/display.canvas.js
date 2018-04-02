@@ -61,7 +61,7 @@ matchThree.display = (function(){
 			setup();
 			tileSprite = new Image();
 			tileSprite.addEventListener("load", callback, false);
-			tileSprite.src = "images/jewels" + titleSize + ".png";
+			tileSprite.src = "images/jewels" + tileSize + ".png";
 			firstRun = false;
 		}
 
@@ -76,7 +76,7 @@ matchThree.display = (function(){
 		bg.width = cols * tileSize;
 		bg.height = rows * tileSize;
 
-		bgctx.fillStyle = "rgba(255,255,255,0.15)";
+		bgctx.fillStyle = "rgba(255,235,255,0.15)";
 
 		for(var x = 0; x < cols; x++){
 			for (var y = 0 ; y < rows ; y++){
@@ -85,9 +85,11 @@ matchThree.display = (function(){
 				}
 			}
 		}
+		return bg;
 	}
 
 	return{
-		init : init
+		init : init,
+		redraw : redraw
 	};
 })();

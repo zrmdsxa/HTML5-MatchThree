@@ -23,6 +23,7 @@ matchThree.board = (function(){
 	}
 
 	function init(callback){
+		console.log("init");
 		settings = matchThree.settings;
 		rows = settings.rows;
 		cols = settings.cols;
@@ -43,6 +44,7 @@ matchThree.board = (function(){
 	}
 
 	function getBoard(){
+		console.log("getboard");
 		var copy = [];
 		var x;
 

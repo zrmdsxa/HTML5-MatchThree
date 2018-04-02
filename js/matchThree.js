@@ -19,6 +19,7 @@ var matchThree = (function(){
 	function hasWebWorkers(){
 		var workers = false;
 		workers = ("Worker" in window);
+		console.log("workers ="+workers);
 		return workers;
 	}
 
@@ -65,7 +66,7 @@ var matchThree = (function(){
 
 		image = new Image();
 		image.onload = image.onerror = function(){
-			numResources++;
+			numResourcesLoaded++;
 			queueEntry.loaded = true;
 			if(!executeRunning){
 				executeScriptQueue();
@@ -75,12 +76,13 @@ var matchThree = (function(){
 	}
 
 	function setup(){
+		console.log("setup");
 		matchThree.showScreen("splash-screen");
-		//showScreen("splash-screen");
+		
 	}
 
 	function showScreen(screenId){
-		console.log("showScreen");
+		console.log("showScreen "+screenId);
 		var dom = matchThree.dom;
 		var $ = dom.$;
 		var activeScreen = $("#game .screen.active")[0];

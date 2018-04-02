@@ -25,7 +25,7 @@ matchThree.screens["game-screen"] = (function(){
 		}
 		paused = true;
 		var dom = matchThree.dom,
-		overlay = dom.$("#game-screen . pause-overlay")[0];
+		overlay = dom.$("#game-screen .pause-overlay")[0];
 		overlay.style.display = "block";
 	}
 

@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'">
 
 		<title>Match Three</title>
 
@@ -14,15 +15,18 @@
 		<script type="text/javascript">
 			window.addEventListener("load", function(){
 				matchThree.load("js/dom.js");
-				matchThree.load("js/screen.splashScreen.js");
+				matchThree.load("js/screen.splashScreen.js", matchThree.setup);
 				matchThree.load("js/screen.mainMenuScreen.js", matchThree.setup);
-
+				
+				console.log(matchThree.hasWebWorkers());
 				if(matchThree.hasWebWorkers()){
 					matchThree.preload("js/board.worker.js");
 					matchThree.load("js/board.worker-interface.js");
+					console.log("using workers");
 				}
 				else{
 					matchThree.load("js/board.js");
+					console.log("not using workers");
 				}
 
 				matchThree.load("js/screen.game.js");

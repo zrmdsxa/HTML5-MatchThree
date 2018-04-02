@@ -1,7 +1,18 @@
 matchThree.screens["splash-screen"] = (function() {
 	var firstRun = true;
 
-	
+	function checkProgress(){
+		console.log("checkProgress");
+		var $ = matchThree.dom.$;
+		var p = matchThree.getLoadProgress() * 100;
+
+		$("#splash-screen .indicator")[0].style.width = p + "%";
+		if(p == 100){
+			setup();
+		}else{
+			setTimeout(checkProgress,30);
+		}
+	}
 
 	function setup(){
 		var dom = matchThree.dom;
@@ -13,22 +24,16 @@ matchThree.screens["splash-screen"] = (function() {
 		dom.bind(screen, "click", function(){
 			matchThree.showScreen("menu-screen");
 		});
+
+		console.log("splash-screen setup");
 	}
 
-	function checkProgress(){
-		var $ = matchThree.dom.$;
-		var p = matchThree.getLoadProgress() * 100;
-
-		$("#splash-screen .indicator")[0].style.width = p + %;
-		if(p == 100){
-			setup();
-		}else{
-			setTimeout(checkProgress,30);
-		}
-	}
+	
 
 	function run(){
+		console.log("run");
 		if(firstRun){
+			console.log(firstRun);
 			checkProgress();
 			firstRun = false;
 		}

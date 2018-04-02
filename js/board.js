@@ -7,7 +7,8 @@ matchThree.board = (function(){
 	var baseScore;
 	var numTileTypes;
 
-	function init(){
+	function init(callback){
+		console.log("init");
 		settings = matchThree.settings;
 		numTileTypes = settings.numTileTypes;
 		baseScore = settings.baseScore;
@@ -22,24 +23,24 @@ matchThree.board = (function(){
 	}
 
 	function fillBoard(){
+		console.log("fillboard");
 		var x,y,type;
 
 		tiles = [];
 
 		for(x = 0; x < cols; x++){
+
+			tiles[x] = [];
 			for(y = 0; y < rows; y++){
+				//console.log(y);
 				do{
 					type = randomTile();
 
+
 				}while((type === getTile(x-1, y) && type === getTile(x-2,y))
 					|| (type === getTile(x,y-1) && getTile(x, y-2)));
-
 				tiles[x][y] = type;
 			}
-		}
-
-		if(!hasMoves()){
-			fillBoard();
 		}
 	}
 
@@ -73,8 +74,8 @@ matchThree.board = (function(){
 	}
 
 	function canSwap(x1, y1, x2, y2){
-		var type1 getTiles(x1,y1);
-		var	type2 = getTiles(x2,y2);
+		var type1 = getTile(x1,y1);
+		var	type2 = getTile(x2,y2);
 		var chain;
 
 		if(!isAdjacent(x1,y1,x2,y2)){
@@ -117,7 +118,7 @@ matchThree.board = (function(){
 
 		for(var x = 0; x < cols; x++){
 			gap[x] = [];
-			for(var y = rows -1; y >= 0;; y--){
+			for(var y = rows -1; y >= 0; y--){
 				if(chains[x][y] > 2){
 					hadChains = true;
 					gaps[x];
@@ -151,7 +152,7 @@ matchThree.board = (function(){
 					type : "score",
 					data : score
 				}, {
-					type : "move"
+					type : "move",
 					data : moved
 				});
 
@@ -178,6 +179,7 @@ matchThree.board = (function(){
 				}
 			}
 		}
+		return false;
 	}
 
 	function canTileMove(x,y){
@@ -188,6 +190,7 @@ matchThree.board = (function(){
 	}
 
 	function getBoard(){
+		console.log("getboard");
 		var copy = [] , x;
 
 		for(x = 0; x < cols; x++){
